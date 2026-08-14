@@ -24,7 +24,6 @@ BASE_DIR = Path(__file__).resolve().parent
 
 @st.cache_resource
 def load_model():
-
     preprocessor = joblib.load(
         BASE_DIR / "churn_preprocessor.pkl"
     )
@@ -47,35 +46,6 @@ st.write(
 )
 
 st.success("Model loaded successfully!")
-
-
-
-import streamlit as st
-import pandas as pd
-import joblib
-
-
-# -----------------------------
-# Page Configuration
-# -----------------------------
-st.set_page_config(
-    page_title="Customer Churn Prediction",
-    page_icon="📊",
-    layout="wide"
-)
-
-
-# -----------------------------
-# Load Saved Model
-# -----------------------------
-@st.cache_resource
-def load_model():
-    preprocessor = joblib.load("churn_preprocessor.pkl")
-    model = joblib.load("churn_model.pkl")
-    return preprocessor, model
-
-
-preprocessor, model = load_model()
 
 
 # -----------------------------
