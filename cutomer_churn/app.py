@@ -2,7 +2,7 @@
 # Customer Churn Prediction Streamlit App
 # Step 2: Import Libraries & Load Model
 # ==========================================
-
+from pathlib import Path
 import streamlit as st
 import pandas as pd
 import joblib
@@ -16,18 +16,27 @@ st.set_page_config(
 )
 
 
-# Load saved preprocessor and model
+# -----------------------------
+# Load Saved Model
+# -----------------------------
+
+BASE_DIR = Path(__file__).resolve().parent
+
 @st.cache_resource
 def load_model():
 
-    preprocessor = joblib.load("churn_preprocessor.pkl")
-    model = joblib.load("churn_model.pkl")
+    preprocessor = joblib.load(
+        BASE_DIR / "churn_preprocessor.pkl"
+    )
+
+    model = joblib.load(
+        BASE_DIR / "churn_model.pkl"
+    )
 
     return preprocessor, model
 
 
 preprocessor, model = load_model()
-
 
 # App title
 st.title("Customer Churn Prediction & Retention Analytics")
